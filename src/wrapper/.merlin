@@ -1,5 +1,5 @@
 B ../../_build/default/src/wrapper
-FLG -open Reactor__ -w -40
+FLG -ccopt '-fPIC'
 PKG bigarray
 PKG bytes
 PKG ctypes

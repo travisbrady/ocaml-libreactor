@@ -3,9 +3,14 @@
 (library
  ((name reactor)
   (public_name reactor)
+  (flags (-ccopt '-fPIC'))
   (c_names (reactor_stubs))
-  (c_flags (:include c_flags.sexp))
-  (c_library_flags (:include c_library_flags.sexp))
+  (c_flags (:standard -Werror -Wunused -I/usr/local/include -shared -fPIC))
+  (c_library_flags (:standard -ldynamic -lreactor -linkall -fPIC))
+  ;(c_flags (:include c_flags.sexp))
+  ;(c_library_flags (:include c_library_flags.sexp))
+  (library_flags (-linkall))
+  (wrapped false)
   (libraries (ctypes.foreign ctypes.stubs ctypes))))
 
 (rule
@@ -17,3 +22,9 @@
  ((targets (reactor_stubs.c reactor_generated.ml))
   (deps    (../stubs/reactor_stubgen.exe))
   (action  (run ${<}))))
+
+(rule
+ ((targets (c_flags.sexp
+            c_library_flags.sexp))
+  (deps    (../config/discover.exe))
+  (action  (run ${<} -ocamlc ${OCAMLC}))))
