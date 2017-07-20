@@ -1,0 +1,19 @@
+(jbuild_version 1)
+
+(library
+ ((name reactor)
+  (public_name reactor)
+  (c_names (reactor_stubs))
+  (c_flags (:include c_flags.sexp))
+  (c_library_flags (:include c_library_flags.sexp))
+  (libraries (ctypes.foreign ctypes.stubs ctypes))))
+
+(rule
+ ((targets (reactor_bindings.ml))
+  (deps    (../stubs/reactor_bindings.ml))
+  (action  (copy ../stubs/reactor_bindings.ml reactor_bindings.ml))))
+
+(rule
+ ((targets (reactor_stubs.c reactor_generated.ml))
+  (deps    (../stubs/reactor_stubgen.exe))
+  (action  (run ${<}))))

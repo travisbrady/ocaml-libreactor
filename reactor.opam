@@ -1,0 +1,28 @@
+opam-version: "1.2"
+name:         "reactor"
+bug-reports:  "https://github.com/travisbrady/ocaml-libreactor/issues"
+homepage:     "https://github.com/travisbrady/ocaml-libreactor"
+dev-repo:     "git+https://github.com/travisbrady/ocaml-libreactor.git"
+maintainer:   "Laurent Mazare <travis.brady@gmail.com>"
+authors:      [ "Travis Brady" ]
+
+version: "dev"
+
+build: [["jbuilder" "build" "--only-packages" "reactor" "--root" "." "-j" jobs "@install"]]
+install: []
+remove:  []
+
+depends: [
+  "ctypes" {>= "0.5"}
+  "ctypes-foreign"
+  "ocamlfind" {build}
+  "jbuilder" {build}
+]
+
+depopts: [
+]
+
+conflicts: [
+]
+
+available: [ ocaml-version >= "4.03" ]
